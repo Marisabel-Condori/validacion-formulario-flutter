@@ -6,7 +6,7 @@ class LoginBloc{
 
   // recuperamos datos del stream
   Stream<String> get emailStream => _emailController.stream;
-  Stream<String> get passwordStream => _emailController.stream;
+  Stream<String> get passwordStream => _passwordController.stream;
 
   // insertar valores del stream
   Function (String) get changeEmail => _emailController.sink.add;
