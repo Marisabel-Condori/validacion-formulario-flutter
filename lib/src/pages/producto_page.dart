@@ -13,7 +13,51 @@ class ProductoPage extends StatelessWidget {
           IconButton(icon: Icon(Icons.camera_alt), onPressed: (){}),
         ],
       ),
-      body: Container(),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Form(
+            child: Column(
+              children: [
+                _crearProducto(),
+                _crearPrecio(),
+                _crearBoton()
+              ],
+              
+            )
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _crearProducto(){
+    return TextFormField(
+      textCapitalization: TextCapitalization.sentences,
+      decoration: InputDecoration(
+        labelText: 'Nombre Producto',
+      ),
+    );
+  }
+
+  Widget _crearPrecio(){
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(
+        labelText: 'Nombre Producto',
+      ),
+    );
+  }
+
+  Widget _crearBoton(){
+    return RaisedButton.icon(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0)
+      ),
+      color: Colors.deepPurple,
+      textColor: Colors.white,
+      label: Text('Guardar'),
+      icon: Icon(Icons.save),
+      onPressed: (){},
     );
   }
 }
