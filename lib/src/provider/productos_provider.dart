@@ -16,15 +16,20 @@ class ProductosProvider{
     return true;
   }
 
+  Future<bool> editarProducto(ProductoModel producto)async {
+    final url = '$_url/producto/${producto.id}.json';
+    final res = await http.put(url, body: productoModelToJson(producto));
+    final decodedData = json.decode(res.body);
+    print(decodedData);
+    return true;
+  }
+
   Future<List<ProductoModel>> cargarProductos() async{
     final url = '$_url/producto.json';
     final resp = await http.get(url);
     final decodedData = json.decode(resp.body);
-    print('**********DECODED DATA**********');
-    print(decodedData);
     if (decodedData == null) return [];
     decodedData.forEach((id, prod){
-      print('***********for each**************');
       final prodTemp = ProductoModel.fromJson(prod);
       prodTemp.id = id;
       productos.add(prodTemp);
