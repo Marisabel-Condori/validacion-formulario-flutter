@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
         onTap: () => Navigator.pushNamed(context, 'producto'),
       ),
       onDismissed: (direction) {
-        
+        productosProvider.borrarProducto(producto.id);
       },
     );
   }
