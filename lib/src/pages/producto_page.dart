@@ -110,9 +110,9 @@ class _ProductoPageState extends State<ProductoPage> {
   void _submit(){
     if (!formkey.currentState.validate()) return;
     formkey.currentState.save();
-
     print(producto.titulo);
     print(producto.valor);
     productoProvder.crearProducto(producto);
+    
   }
 }
