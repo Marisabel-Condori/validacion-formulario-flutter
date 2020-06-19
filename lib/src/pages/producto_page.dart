@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
+
 import 'package:validacion_de_formularios/src/model/productoModel.dart';
 import 'package:validacion_de_formularios/src/provider/productos_provider.dart';
 import 'package:validacion_de_formularios/src/utils/util.dart' as utils;
@@ -121,11 +122,16 @@ class _ProductoPageState extends State<ProductoPage> {
     );
   }
 
-  void _submit(){
+  void _submit()async{
     if (!formkey.currentState.validate()) return;
     formkey.currentState.save();
     _guardando = true;
     setState(() { });
+
+    if (foto!= null) {
+      producto.fotoUrl = await productoProvder.subirImagen(foto);
+    }
+
     if (producto.id == null) {
       productoProvder.crearProducto(producto);
     } else {
