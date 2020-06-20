@@ -4,12 +4,20 @@ import 'package:validacion_de_formularios/src/pages/home_page.dart';
 import 'package:validacion_de_formularios/src/pages/login_page.dart';
 import 'package:validacion_de_formularios/src/pages/producto_page.dart';
 import 'package:validacion_de_formularios/src/pages/registro_page.dart';
+import 'package:validacion_de_formularios/src/preferencias_usuario/preferenciasUsuario.dart';
  
-void main() => runApp(MyApp());
+void main() async{ 
+  final prefs = new PreferenciasUsuario();
+  await prefs.initPrefs();
+
+  runApp(MyApp());
+  }
  
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _prefs = new PreferenciasUsuario();
+    print(_prefs);
     return Provider(
       child: MaterialApp(
       debugShowCheckedModeBanner: false,

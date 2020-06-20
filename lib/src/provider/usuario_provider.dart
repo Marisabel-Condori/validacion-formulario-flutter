@@ -1,7 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:validacion_de_formularios/src/preferencias_usuario/preferenciasUsuario.dart';
 
 class UsuarioProvider{
+final _prefs = PreferenciasUsuario();
+
 
   Future<Map<String,dynamic>> loginProvider(String email, String password)async{
 
@@ -19,6 +22,7 @@ class UsuarioProvider{
     print(decodeResp);
 
     if(decodeResp.containsKey('idToken')){
+      _prefs.token = decodeResp['idToken'];
       return {'ok':true, 'token': decodeResp['idToken']};
     }else{
       return {'ok':false, 'mensaje': decodeResp['error']['message']};
@@ -41,6 +45,7 @@ class UsuarioProvider{
     print(decodeResp);
 
     if(decodeResp.containsKey('idToken')){
+      _prefs.token = decodeResp['idToken'];
       return {'ok':true, 'token': decodeResp['idToken']};
     }else{
       return {'ok':false, 'mensaje': decodeResp['error']['message']};
