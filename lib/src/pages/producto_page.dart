@@ -151,7 +151,12 @@ class _ProductoPageState extends State<ProductoPage> {
 
   _mostrarFoto(){
     if(producto.fotoUrl != null){
-      return Container();
+      return FadeInImage(
+        placeholder: AssetImage('assets/jar-loading.gif'), 
+        image: NetworkImage(producto.fotoUrl),
+        height: 300.0,
+        fit: BoxFit.cover,
+      );
     }else{
       return Image(
         image: AssetImage(foto?.path?? 'assets/no-image.png'),
@@ -172,7 +177,7 @@ class _ProductoPageState extends State<ProductoPage> {
   _procesarImagen(ImageSource tipo)async{
     foto = await ImagePicker.pickImage(source: tipo);
     if (foto != null) {
-      
+      producto.fotoUrl = null;
     }
     setState(() {  });
   }
