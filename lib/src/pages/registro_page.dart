@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:validacion_de_formularios/src/block/provider.dart';
 import 'package:validacion_de_formularios/src/provider/usuario_provider.dart';
+import 'package:validacion_de_formularios/src/utils/util.dart';
 
 class RegistroPage extends StatelessWidget {
   final usuarioProvider = new UsuarioProvider();
@@ -179,9 +180,13 @@ class RegistroPage extends StatelessWidget {
   }
   
 
-  _agarrarDatos(BuildContext context ,LoginBloc bloc){
-    usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
+  _agarrarDatos(BuildContext context ,LoginBloc bloc)async{
+    Map info = await usuarioProvider.loginProvider(bloc.email, bloc.password);
 
-  //   Navigator.pushReplacementNamed(context, '/');
-   }
+    if(info['ok']){
+     Navigator.pushReplacementNamed(context, '/');
+    }else{
+      mostrarAlerta(context, info['mensaje']);
+    }
+  }
 }
