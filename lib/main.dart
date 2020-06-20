@@ -7,17 +7,18 @@ import 'package:validacion_de_formularios/src/pages/registro_page.dart';
 import 'package:validacion_de_formularios/src/preferencias_usuario/preferenciasUsuario.dart';
  
 void main() async{ 
+  WidgetsFlutterBinding.ensureInitialized();
   final prefs = new PreferenciasUsuario();
   await prefs.initPrefs();
 
   runApp(MyApp());
-  }
+}
  
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _prefs = new PreferenciasUsuario();
-    print(_prefs);
+    final prefs = new PreferenciasUsuario();
+    print(prefs.token);
     return Provider(
       child: MaterialApp(
       debugShowCheckedModeBanner: false,
