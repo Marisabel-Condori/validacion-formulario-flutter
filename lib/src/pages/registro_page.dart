@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:validacion_de_formularios/src/block/provider.dart';
+import 'package:validacion_de_formularios/src/provider/usuario_provider.dart';
 
 class RegistroPage extends StatelessWidget {
+  final usuarioProvider = new UsuarioProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +94,7 @@ class RegistroPage extends StatelessWidget {
             
             child: Column(
               children: [
-                Text('Ingreso'),
+                Text('Registro'),
                 SizedBox(height: 60.0),
                 _crearEmail(bloc),
                 SizedBox(height: 20.0),
@@ -178,11 +180,8 @@ class RegistroPage extends StatelessWidget {
   
 
   _agarrarDatos(BuildContext context ,LoginBloc bloc){
-    print('**************************');
-    print(bloc.email);
-    print(bloc.password);
-    print('**************************');
+    usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
 
-    Navigator.pushReplacementNamed(context, '/');
-  }
+  //   Navigator.pushReplacementNamed(context, '/');
+   }
 }
