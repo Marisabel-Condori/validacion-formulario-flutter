@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:validacion_de_formularios/src/block/provider.dart';
+import 'package:validacion_de_formularios/src/provider/usuario_provider.dart';
 
 class LoginPage extends StatelessWidget {
+  final usuarioProvider = new UsuarioProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -179,11 +181,8 @@ class LoginPage extends StatelessWidget {
   
 
   _agarrarDatos(BuildContext context ,LoginBloc bloc){
-    print('**************************');
-    print(bloc.email);
-    print(bloc.password);
-    print('**************************');
+    usuarioProvider.loginProvider(bloc.email, bloc.password);
 
-    Navigator.pushReplacementNamed(context, '/');
+    // Navigator.pushReplacementNamed(context, '/');
   }
 }
