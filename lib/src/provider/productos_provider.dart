@@ -14,7 +14,7 @@ class ProductosProvider{
   final List<ProductoModel> productos = new List<ProductoModel>();
 
   Future<bool> crearProducto(ProductoModel producto)async {
-    final url = '$_url/producto.json?auth = ${_prefs.token}';
+    final url = '$_url/producto.json?auth=${_prefs.token}';
     final res = await http.post(url, body: productoModelToJson(producto));
     final decodedData = json.decode(res.body);
     print(decodedData);
@@ -22,7 +22,7 @@ class ProductosProvider{
   }
 
   Future<bool> editarProducto(ProductoModel producto)async {
-    final url = '$_url/producto/${producto.id}.json?auth = ${_prefs.token}';
+    final url = '$_url/producto/${producto.id}.json?auth=${_prefs.token}';
     final res = await http.put(url, body: productoModelToJson(producto));
     final decodedData = json.decode(res.body);
     print(decodedData);
@@ -30,7 +30,7 @@ class ProductosProvider{
   }
 
   Future<List<ProductoModel>> cargarProductos() async{
-    final url = '$_url/producto.json?auth = ${_prefs.token}';
+    final url = '$_url/producto.json?auth=${_prefs.token}';
     final resp = await http.get(url);
     final decodedData = json.decode(resp.body);
     if (decodedData == null) return [];
@@ -39,16 +39,19 @@ class ProductosProvider{
       prodTemp.id = id;
       productos.add(prodTemp);
     });
+    print('*************PRODUCTOS*****************');
     print(productos);
     return productos;
   }
 
+
   Future<int> borrarProducto(String id)async{
-    final url = '$_url/producto/$id.json?auth = ${_prefs.token}';
+    final url = '$_url/producto/$id.json?auth=${_prefs.token}';
     final resp = await http.delete(url);
     print(resp.body);
     return 1;
   }
+
 
   Future<String> subirImagen(File imagen)async{
     final url = Uri.parse('https://api.cloudinary.com/v1_1/dypifgbw7/image/upload?upload_preset=szffpgf0');
@@ -66,6 +69,7 @@ class ProductosProvider{
       return null;
     }
     final respData = json.decode(resp.body);
+    print('**********************resp data*************************** cargar foto*********');
     print(respData);
     return respData['secure_url'];
   }

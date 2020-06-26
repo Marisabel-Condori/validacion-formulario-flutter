@@ -178,7 +178,6 @@ class RegistroPage extends StatelessWidget {
       }
     );
   }
-  
 
   _agarrarDatos(BuildContext context ,LoginBloc bloc)async{
     Map info = await usuarioProvider.loginProvider(bloc.email, bloc.password);
